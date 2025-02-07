@@ -1,13 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
 import 'package:guia_moteis/view_model/carrossel_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class ImageCarousel extends StatelessWidget {
   final List<String> imageUrls;
+  final String suites;
 
-  const ImageCarousel({super.key, required this.imageUrls});
+  const ImageCarousel({super.key, required this.imageUrls, required this.suites});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,11 @@ class ImageCarousel extends StatelessWidget {
                 carouselViewModel.updateIndex(index);
               },
             ),
+          ),
+          Positioned(
+            top: 6,
+            left: 4,
+            child: Chip(label: Text(suites))
           ),
           Positioned(
             bottom: 8 , // Posiciona os indicadores na parte inferior

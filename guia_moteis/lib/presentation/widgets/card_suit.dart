@@ -1,13 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:guia_moteis/models/moteis_model.dart';
+import 'package:guia_moteis/domain/entities/categoria_itens_entity.dart';
+import 'package:guia_moteis/domain/entities/itens_entity.dart';
+import 'package:guia_moteis/domain/entities/periodos_entity.dart';
 
 class CardSuit extends StatelessWidget {
   final List<String> imageUrls;
   final String title;
-  final List<CategoriaItens> categoriaItens;
-  final List<Itens> description;
-  final List<Periodos> price;
+  final List<CategoriaItensEntity> categoriaItens;
+  final List<ItensEntity> description;
+  final List<PeriodosEntity> price;
 
   const CardSuit({
     super.key,
@@ -37,7 +39,7 @@ class CardSuit extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: CircleAvatar(
                             radius: 20,
-                            backgroundImage: CachedNetworkImageProvider(item.icone!),
+                            backgroundImage: CachedNetworkImageProvider(item.icone),
                           ),
                         
                         );
@@ -109,7 +111,7 @@ class CardSuit extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(item.tempoFormatado!,
+                          child: Text(item.tempoFormatado,
                               textAlign: TextAlign.center),
                         ),
                         Padding(

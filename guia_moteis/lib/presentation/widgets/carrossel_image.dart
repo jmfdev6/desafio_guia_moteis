@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
-import 'package:guia_moteis/view_model/carrossel_viewmodel.dart';
+import 'package:guia_moteis/presentation/providers/carrousel_image_provider.dart';
 import 'package:provider/provider.dart';
 
 class ImageCarousel extends StatelessWidget {
@@ -13,7 +12,7 @@ class ImageCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final carouselViewModel = Provider.of<CarouselViewModel>(context);
+    final carouselViewModel = Provider.of<CarrouselImageProvider>(context);
     return SizedBox.expand( // Ocupa toda a área disponível
       child: Stack(
         children: [

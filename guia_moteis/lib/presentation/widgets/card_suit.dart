@@ -22,12 +22,11 @@ class CardSuit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
+    return  SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Ícones das categorias
+           SizedBox(height: 20,),
            SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -36,8 +35,9 @@ class CardSuit extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: categoriaItens.map((item) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          padding: const EdgeInsets.symmetric(horizontal: 3),
                           child: CircleAvatar(
+                            backgroundColor: Color(0xFFF0F1F3),
                             radius: 20,
                             backgroundImage: CachedNetworkImageProvider(item.icone),
                           ),
@@ -53,6 +53,7 @@ class CardSuit extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 10),
+            Text("Preços e periodos", style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF555658)),),
             // Itens da categoria
         
             /*Wrap(
@@ -66,47 +67,15 @@ class CardSuit extends StatelessWidget {
             ),*/
         
             const SizedBox(height: 8),
-            // Tabela de preços
             Table(
-              border: TableBorder.all(width: 0.5, color: Colors.deepPurple),
+              border: TableBorder.all(width: 0.5, color: Colors.blueGrey),
               columnWidths: const {
-                0: FlexColumnWidth(3), // Tempo
-                1: FlexColumnWidth(2), // Valor
+                0: FlexColumnWidth(2), // Tempo
+                1: FlexColumnWidth(3), // Valor
                 2: FlexColumnWidth(2), // Desconto
                 3: FlexColumnWidth(2), // Total
               },
               children: [
-                // Cabeçalho da tabela
-                const TableRow(
-                  decoration: BoxDecoration(color: Colors.deepPurple),
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("Tempo",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("Valor",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("Desconto",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("Total",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                  ],
-                ),
-                // Dados da tabela
                 ...price.map((item) => TableRow(
                       children: [
                         Padding(
@@ -126,6 +95,7 @@ class CardSuit extends StatelessWidget {
                                 ? "R\$ ${item.desconto!.desconto}"
                                 : "-",
                             textAlign: TextAlign.center,
+                            style: TextStyle(color: Color(0xFF2BA77A)),
                           ),
                         ),
                         Padding(
@@ -137,18 +107,8 @@ class CardSuit extends StatelessWidget {
                     )),
               ],
             ),
-        
-            const SizedBox(height: 10),
-            // Avaliações
-        
-            // Botão de reserva
-            FilledButton(
-              onPressed: () {},
-              child: const Text("Reservar"),
-            ),
           ],
         ),
-      ),
     );
   }
 }

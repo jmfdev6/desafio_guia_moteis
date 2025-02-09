@@ -8,7 +8,7 @@ class MoteisApiService {
 
   /// Realiza a requisição para buscar os motéis e retorna o JSON
   Future<Map<String, dynamic>> fetchMoteis() async {
-    final response = await http.get(Uri.parse('$baseUrl/moteis'));
+    final response = await http.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
       return json.decode(response.body) as Map<String, dynamic>;
     } else {

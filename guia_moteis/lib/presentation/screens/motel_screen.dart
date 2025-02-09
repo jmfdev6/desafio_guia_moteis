@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:guia_moteis/presentation/providers/motel_list_provider.dart';
 import 'package:guia_moteis/presentation/screens/suites_screen.dart';
 import 'package:guia_moteis/presentation/widgets/motel_card.dart';
+import 'package:guia_moteis/presentation/widgets/motel_shimmer.dart';
+
 import 'package:provider/provider.dart';
 
 class MoteisScreen extends StatelessWidget {
@@ -14,7 +16,8 @@ class MoteisScreen extends StatelessWidget {
       body: Consumer<MoteisProvider>(
         builder: (context, provider, _) {
           if (provider.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            // Exibe o widget shimmer composto
+            return const MoteisScreenShimmer();
           }
           if (provider.errorMessage != null) {
             return Center(child: Text(provider.errorMessage!));
@@ -23,24 +26,30 @@ class MoteisScreen extends StatelessWidget {
             return const Center(child: Text("Nenhum dado disponível."));
           }
 
-          // Exibindo os motéis em uma ListView
+          // Exibe os dados reais
           return ListView.builder(
             itemCount: provider.moteis!.data.moteis.length,
             itemBuilder: (context, index) {
               final motel = provider.moteis!.data.moteis[index];
 
-              // Definindo imagens com fallback (usando as fotos da primeira suíte, se disponível)
+              // Definindo imagens com fallback
               List<String> imagens = [];
               if (motel.suites.isNotEmpty) {
                 imagens = motel.suites.first.fotos;
               } else {
-                imagens = ['https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary-800x450.webp'];
+                imagens = [
+                  'https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary-800x450.webp'
+                ];
               }
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Divider(height:14, color: Color(0xFFF0F0F0),thickness: 10,),
+                  const Divider(
+                    height: 14,
+                    color: Color(0xFFF0F0F0),
+                    thickness: 10,
+                  ),
                   MotelCard(motel: motel),
                   const SizedBox(height: 2),
                   Container(
@@ -51,7 +60,6 @@ class MoteisScreen extends StatelessWidget {
                       imageUrls: imagens,
                     ),
                   ),
-                  
                 ],
               );
             },

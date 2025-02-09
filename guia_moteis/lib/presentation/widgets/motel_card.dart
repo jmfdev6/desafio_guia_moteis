@@ -14,7 +14,7 @@ class MotelCard extends StatelessWidget {
               radius: 30,
               backgroundImage: NetworkImage(motel.logo),
             )
-          : const Icon(Icons.hotel, size: 50),
+          : const Icon(Icons.poll_rounded, size: 50),
       title: Text(motel.fantasia),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

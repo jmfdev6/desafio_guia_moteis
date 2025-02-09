@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Motéis App',
-        theme: ThemeData(colorSchemeSeed: Colors.white),
+        theme: ThemeData(useMaterial3:true, colorSchemeSeed:  Colors.white),
         home: const MoteisScreen(),
       ),
     );

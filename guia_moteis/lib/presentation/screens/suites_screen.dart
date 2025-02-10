@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guia_moteis/domain/entities/suite_entity.dart';
-import 'package:guia_moteis/presentation/widgets/card_suit.dart';
 import 'package:guia_moteis/presentation/widgets/carrossel_image.dart';
+import 'package:guia_moteis/presentation/widgets/suites/card_suit.dart';
 
 class SuitesScreen extends StatefulWidget {
   final List<SuiteEntity>? suites;

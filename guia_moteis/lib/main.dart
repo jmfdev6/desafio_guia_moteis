@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:guia_moteis/domain/usecases/get_moteis.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'dependency_injection.dart';
+import 'package:guia_moteis/presentation/providers/motel_list_provider.dart';
 import 'package:guia_moteis/presentation/providers/carrousel_image_provider.dart';
+import 'package:guia_moteis/presentation/screens/motel_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
 
-import 'dependency_injection.dart'; // Importa o arquivo que criamos
-import 'presentation/providers/motel_list_provider.dart';
-import 'presentation/screens/motel_screen.dart';
+final GetIt getIt = GetIt.instance;
 
-void main() {
+Future<void> main() async {
+  // Garante que os bindings do Flutter estejam prontos
   WidgetsFlutterBinding.ensureInitialized();
-  setupDependencies(); // Inicializa as dependências
+  // Inicializa o Hive para Flutter (isso configura um caminho padrão para armazenar as boxes)
+  await Hive.initFlutter();
+  
+  // Configura as dependências (registrando serviços, repositórios, etc.)
+  setupDependencies();
+  
   runApp(const MyApp());
 }
 
@@ -22,17 +31,16 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<MoteisProvider>(
           create: (_) => MoteisProvider(
-            getMoteisUseCase: getIt<GetMoteis>(), // Recupera a instância do GetMoteis
-          )..loadMoteis(), // Chama o método para carregar os dados
+            getMoteisUseCase: getIt<GetMoteis>(),
+          )..loadMoteis(),
         ),
-          ChangeNotifierProvider<CarrouselImageProvider>(
+        ChangeNotifierProvider<CarrouselImageProvider>(
           create: (_) => CarrouselImageProvider(),
-        ), // Adicione o CarrouselImageProvider
-        // Caso futuramente adicione mais providers, basta incluí-los aqui.
+        ),
       ],
       child: MaterialApp(
         title: 'Motéis App',
-        theme: ThemeData(useMaterial3:true, colorSchemeSeed:  Colors.white),
+        theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.white),
         home: const MoteisScreen(),
       ),
     );

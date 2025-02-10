@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerImageCarousel extends StatelessWidget {
-  const ShimmerImageCarousel({Key? key}) : super(key: key);
+  const ShimmerImageCarousel({super.key});
 
   @override
   Widget build(BuildContext context) {

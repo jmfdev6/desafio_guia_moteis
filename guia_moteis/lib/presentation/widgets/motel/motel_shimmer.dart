@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'package:guia_moteis/presentation/widgets/carrossel_image_shimmer.dart';
-import 'package:guia_moteis/presentation/widgets/motel_card_shimmer.dart';
 import 'package:guia_moteis/presentation/widgets/suites/card_suit_shimmer.dart';
+import 'package:guia_moteis/presentation/widgets/carrossel_image_shimmer.dart';
+import 'package:guia_moteis/presentation/widgets/motel/motel_card_shimmer.dart';
 
 
 

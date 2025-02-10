@@ -1,5 +1,5 @@
-import '../entities/moteis_entity.dart';
-import '../repositories/moteis_repository.dart';
+import 'package:guia_moteis/domain/entities/moteis_entity.dart';
+import 'package:guia_moteis/domain/repositories/moteis_repository.dart';
 
 class GetMoteis {
   final MoteisRepository repository;

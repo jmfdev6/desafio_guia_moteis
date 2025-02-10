@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:guia_moteis/presentation/providers/motel_list_provider.dart';
 import 'package:guia_moteis/presentation/screens/suites_screen.dart';
-import 'package:guia_moteis/presentation/widgets/motel_card.dart';
-import 'package:guia_moteis/presentation/widgets/motel_shimmer.dart';
+import 'package:guia_moteis/presentation/widgets/motel/motel_card.dart';
+import 'package:guia_moteis/presentation/widgets/motel/motel_shimmer.dart';
 
 import 'package:provider/provider.dart';
 

@@ -5,9 +5,9 @@ import '../../domain/usecases/get_moteis.dart';
 class MoteisProvider extends ChangeNotifier {
   final GetMoteisUseCase getMoteisUseCase;
 
-  MoteisEntity? moteis; // Propriedade para armazenar os motéis
-  bool isLoading = false; // Propriedade para controlar o carregamento
-  String? errorMessage; // Propriedade para armazenar mensagens de erro
+  MoteisEntity? moteis; 
+  bool isLoading = false;
+  String? errorMessage; 
 
   MoteisProvider({required this.getMoteisUseCase});
 
@@ -25,7 +25,7 @@ class MoteisProvider extends ChangeNotifier {
       }
     } catch (error) {
       errorMessage = error.toString(); // Ou uma mensagem mais genérica
-      moteis = null; // Limpe os dados em caso de erro
+      moteis = null; 
     } finally {
       isLoading = false;
       notifyListeners();

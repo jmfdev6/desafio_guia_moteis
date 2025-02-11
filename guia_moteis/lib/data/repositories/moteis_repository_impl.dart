@@ -1,47 +1,48 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:guia_moteis/data/datasources/moteis_local_data_source.dart';
-import 'package:guia_moteis/data/datasources/moteis_remote_data_source.dart';
+// ignore_for_file: unrelated_type_equality_checks
+
+import 'package:guia_moteis/data/datasources/local_cache.dart';
+import 'package:guia_moteis/data/datasources/remote_data_source.dart';
 import 'package:guia_moteis/data/models/moteis_model.dart';
 import 'package:guia_moteis/domain/entities/moteis_entity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity package
 import 'package:guia_moteis/domain/entities/motel_entity.dart';
 import 'package:guia_moteis/domain/repositories/moteis_repository.dart';
 
 class MoteisRepositoryImpl implements MoteisRepository {
-  final MoteisRemoteDataSource remoteDataSource;
-  final MoteisLocalDataSource localDataSource;
-  final Connectivity connectivity;
+  final RemoteDataSource remoteDataSource;
+  final LocalCache localCache;
+  final Connectivity connectivity; // Add the Connectivity dependency
 
   MoteisRepositoryImpl({
     required this.remoteDataSource,
-    required this.localDataSource,
-    required this.connectivity,
+    required this.localCache,
+    required this.connectivity, // Initialize the Connectivity
   });
 
   @override
   Future<MoteisEntity> getMoteis() async {
-    final isOnline = await _isConnected();
-
     try {
+      // Use the injected Connectivity instance
+      final isOnline = await _isConnected();
       if (isOnline) {
-        final moteisJson = await remoteDataSource.fetchMoteisJson();
-        final moteis = MoteisModel.fromJson(moteisJson);
-        await localDataSource.cacheMoteis(moteis);
-        return moteis.toEntity();
+        final response = await remoteDataSource.fetchMoteisJson();
+        final model = MoteisModel.fromJson(response);
+        await localCache.cacheMoteis(model);
+        return model.toEntity();
       } else {
-        final cachedMoteis = await localDataSource.getCachedMoteis();
-        if (cachedMoteis != null) {
-          return cachedMoteis.toEntity();
+        final cachedModel = await localCache.getCachedMoteis();
+        if (cachedModel != null) {
+          return cachedModel.toEntity();
         } else {
-          throw NoConnectionException('Sem conexão e sem dados em cache.');
+          throw Exception('Sem conexão e sem dados em cache');
         }
       }
     } catch (e) {
-      if (e is NoConnectionException) rethrow; // Re-lança a exceção de conexão
-      final cachedMoteis = await localDataSource.getCachedMoteis();
-      if (cachedMoteis != null) {
-        return cachedMoteis.toEntity();
+      final cachedModel = await localCache.getCachedMoteis();
+      if (cachedModel != null) {
+        return cachedModel.toEntity();
       }
-      throw RepositoryException('Erro ao obter dados: $e');
+      rethrow;
     }
   }
 
@@ -52,23 +53,6 @@ class MoteisRepositoryImpl implements MoteisRepository {
 
   @override
   Future<void> saveMotel(MotelEntity motel) {
-   
     throw UnimplementedError();
   }
-}
-
-class NoConnectionException implements Exception {
-  final String message;
-  NoConnectionException(this.message);
-
-  @override
-  String toString() => 'NoConnectionException: $message';
-}
-
-class RepositoryException implements Exception {
-  final String message;
-  RepositoryException(this.message);
-
-  @override
-  String toString() => 'RepositoryException: $message';
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guia_moteis/presentation/providers/moteis_provider.dart';
+import 'package:guia_moteis/presentation/providers/motel_list_provider.dart';
 import 'package:guia_moteis/presentation/screens/suites_screen.dart';
 import 'package:guia_moteis/presentation/widgets/motel/motel_card.dart';
 import 'package:guia_moteis/presentation/widgets/motel/motel_shimmer.dart';
@@ -15,13 +15,16 @@ class MoteisScreen extends StatelessWidget {
       appBar: AppBar(title: const Text("Motéis")),
       body: Consumer<MoteisProvider>(
         builder: (context, provider, _) {
-                   if (provider.isLoading) {
+          if (provider.isLoading) {
+            // Exibe o widget shimmer composto
             return const MoteisScreenShimmer();
-          } else if (provider.errorMessage != null) {
-            return Center(child: Text(provider.errorMessage!)); // Ou um widget de erro
-          } else if (provider.moteis == null || provider.moteis!.data.moteis.isEmpty) {
-            return const Center(child: Text("Nenhum dado disponível.")); // Ou um widget NoDataAvailable
-          } else {
+          }
+          if (provider.errorMessage != null) {
+            return Center(child: Text(provider.errorMessage!));
+          }
+          if (provider.moteis == null) {
+            return const Center(child: Text("Nenhum dado disponível."));
+          }
 
           // Exibe os dados reais
           return ListView.builder(
@@ -61,8 +64,7 @@ class MoteisScreen extends StatelessWidget {
               );
             },
           );
-        }
-      }
+        },
       ),
     );
   }

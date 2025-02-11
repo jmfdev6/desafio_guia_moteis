@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:guia_moteis/data/datasources/remote_data_source.dart';
 import 'package:guia_moteis/data/services/moteis_api_service.dart';
@@ -24,7 +25,7 @@ void setupDependencies() {
   getIt.registerLazySingleton<MoteisRepository>(
       () => MoteisRepositoryImpl(
             remoteDataSource: getIt<RemoteDataSource>(),
-            localCache: getIt<LocalCache>(),
+            localCache: getIt<LocalCache>(), connectivity: Connectivity(),
           ));
 
   // Registra o GetMoteis use case

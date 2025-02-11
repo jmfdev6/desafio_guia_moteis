@@ -1,12 +1,12 @@
 import 'package:guia_moteis/domain/entities/moteis_entity.dart';
 import 'package:guia_moteis/domain/repositories/moteis_repository.dart';
 
-class GetMoteis {
+class GetMoteisUseCase {
   final MoteisRepository repository;
 
-  GetMoteis(this.repository);
+  GetMoteisUseCase({required this.repository});
 
-  Future<MoteisEntity> call() async {
+  Future<MoteisEntity> execute() async {
     return await repository.getMoteis();
   }
 }

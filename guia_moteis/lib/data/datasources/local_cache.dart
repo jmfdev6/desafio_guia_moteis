@@ -1,25 +1,45 @@
 import 'dart:convert';
 import 'package:guia_moteis/data/models/moteis_model.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class LocalCache {
   static const String boxName = 'moteisBox';
+  static LocalCache? _instance;
+  Box<String>? _box;
 
-  /// Armazena os dados do modelo no Hive.
-  Future<void> cacheMoteis(MoteisModel model) async {
-    final box = await Hive.openBox(boxName);
-    String jsonString = jsonEncode(model.toJson());
-    await box.put('cachedMoteis', jsonString);
+  LocalCache._internal();
+
+  static LocalCache get instance {
+    _instance ??= LocalCache._internal();
+    return _instance!;
   }
 
-  /// Recupera os dados do cache e os converte para o modelo.
-  Future<MoteisModel?> getCachedMoteis() async {
-    final box = await Hive.openBox(boxName);
-    String? jsonString = box.get('cachedMoteis');
-    if (jsonString != null) {
-      Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-      return MoteisModel.fromJson(jsonMap);
+  Future<void> _openBox() async {
+    _box ??= await Hive.openBox<String>(boxName);
+  }
+
+  Future<void> cacheMoteis(MoteisModel model) async {
+    await _openBox();
+    try {
+      String jsonString = jsonEncode(model.toJson());
+      await _box!.put('cachedMoteis', jsonString);
+    } catch (e) {
+      print('Erro ao armazenar em cache: $e');
     }
-    return null;
+  }
+
+  Future<MoteisModel?> getCachedMoteis() async {
+    await _openBox();
+    try {
+      String? jsonString = _box!.get('cachedMoteis');
+      if (jsonString != null) {
+        Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+        return MoteisModel.fromJson(jsonMap);
+      }
+      return null;
+    } catch (e) {
+      print('Erro ao recuperar do cache: $e');
+      return null;
+    }
   }
 }

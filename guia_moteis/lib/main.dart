@@ -11,12 +11,11 @@ import 'package:get_it/get_it.dart';
 final GetIt getIt = GetIt.instance;
 
 Future<void> main() async {
-  // Garante que os bindings do Flutter estejam prontos
+  
   WidgetsFlutterBinding.ensureInitialized();
-  // Inicializa o Hive para Flutter (isso configura um caminho padrão para armazenar as boxes)
+
   await Hive.initFlutter();
   
-  // Configura as dependências (registrando serviços, repositórios, etc.)
   setupDependencies();
   
   runApp(const MyApp());

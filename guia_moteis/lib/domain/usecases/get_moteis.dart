@@ -9,4 +9,6 @@ class GetMoteis {
   Future<MoteisEntity> call() async {
     return await repository.getMoteis();
   }
+
+  execute() {}
 }

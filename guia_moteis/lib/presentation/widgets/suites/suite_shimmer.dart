@@ -9,7 +9,6 @@ class SuitesScreenShimmer extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // Cabeçalho: simula o nome da suíte e botões de navegação
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Shimmer.fromColors(
@@ -22,7 +21,6 @@ class SuitesScreenShimmer extends StatelessWidget {
               ),
             ),
           ),
-          // Placeholder para o ImageCarousel
           Expanded(
             flex: 5,
             child: Shimmer.fromColors(
@@ -37,7 +35,6 @@ class SuitesScreenShimmer extends StatelessWidget {
               ),
             ),
           ),
-          // Placeholder para o CardSuit (dados da suíte: categorias, preços, etc.)
           Expanded(
             flex: 6,
             child: Padding(

@@ -10,7 +10,7 @@ class MoteisRemoteDataSource {
       final response = await apiService.fetchMoteis();
       return response;
     } catch (e) {
-      throw ApiException('Falha ao buscar dados da API: $e');
+      throw ApiException('Falha ao buscar dados da API: ');
     }
   }
 }
@@ -20,5 +20,5 @@ class ApiException implements Exception {
   ApiException(this.message);
 
   @override
-  String toString() => 'ApiException: $message';
+  String toString() => 'Sem conexão ';
 }

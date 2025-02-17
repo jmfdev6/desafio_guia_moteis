@@ -1,0 +1,2 @@
+/home/jose/desafio_guia_moteis/guia_moteis/android/app/.cxx/Debug/58z3g5y1/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/jose/desafio_guia_moteis/guia_moteis/android/app/.cxx/Debug/58z3g5y1/armeabi-v7a/CMakeFiles/rebuild_cache.dir

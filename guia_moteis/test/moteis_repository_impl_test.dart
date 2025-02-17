@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:guia_moteis/data/datasources/moteis_remote_data_source.dart';
+
 import 'package:guia_moteis/data/datasources/local_cache.dart';
+import 'package:guia_moteis/data/datasources/remote_data_source.dart' show RemoteDataSource;
 import 'package:guia_moteis/data/models/moteis_model.dart';
 import 'package:guia_moteis/data/repositories/moteis_repository_impl.dart';
 import 'package:guia_moteis/domain/entities/moteis_entity.dart';
@@ -8,7 +9,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 // Mocks
-class MockRemoteDataSource extends Mock implements MoteisRemoteDataSource {}
+class MockRemoteDataSource extends Mock implements RemoteDataSource {}
 class MockLocalCache extends Mock implements LocalCache {}
 class MockConnectivity extends Mock implements Connectivity {}
 class FakeMoteisModel extends Fake implements MoteisModel {}
@@ -87,7 +88,6 @@ void main() {
     repository = MoteisRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
       localCache: mockLocalCache,
-      connectivity: mockConnectivity,
     );
 
     testModel = MoteisModel.fromJson(testJson);

@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/home/jose/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/jose/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/jose/desafio_guia_moteis/guia_moteis/android/app/.cxx/Debug/58z3g5y1/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/jose/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/jose/desafio_guia_moteis/guia_moteis/android/app/.cxx/Debug/58z3g5y1/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
